@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>zhmayusi</title>
+    <link>https://zhmayusi.github.io/</link>
+    <description>Recent content on zhmayusi</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 13 Jun 2024 00:11:11 +0800</lastBuildDate>
+    <atom:link href="https://zhmayusi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>`container_of` macro from the Linux</title>
+      <link>https://zhmayusi.github.io/posts/2024-06-13-container_of/</link>
+      <pubDate>Thu, 13 Jun 2024 00:11:11 +0800</pubDate>
+      <guid>https://zhmayusi.github.io/posts/2024-06-13-container_of/</guid>
+      <description>While working on my code, I came across the container_of macro, which I&amp;rsquo;ve seen before but never really delved into. Its implementation was mostly as I expected, but some details caught my interest.&#xA;#define offsetof(TYPE, MEMBER) ((size_t) &amp;amp;((TYPE *)0)-&amp;gt;MEMBER) /** * container_of - cast a member of a structure out to the containing structure * @ptr: the pointer to the member. * @type: the type of the container struct this is embedded in.</description>
+    </item>
+  </channel>
+</rss>

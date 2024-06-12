@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<style type=text/css>body{font-family:monospace;}</style>
+	<title>`container_of` macro from the Linux</title>
+	
+	
+	<link rel="stylesheet" href="/css/style.css">
+	
+	
+</head>
+<body>
+	<header>
+	==============<br>
+	== <a href="https://zhmayusi.github.io/">zhmayusi</a> ==<br>
+	==============
+	<div style="float: right;"></div><br>
+	<p>
+	<nav>
+			<a href="/"><b>Home</b></a>.
+			
+			
+			<a href="/posts/"><b>Posts</b></a>.
+			
+			<a href="/categories/"><b>Categories</b></a>.
+			
+			<a href="/tags/"><b>Tags</b></a>.
+			
+	</nav>
+	</p>
+	
+</header>
+
+	
+	<main>
+		<article>
+			<h1>`container_of` macro from the Linux</h1>
+			<b><time>13.06.2024 00:11</time></b>
+		       
+		           <a href="/tags/linux">Linux</a>
+        	       
+		           <a href="/tags/c">C</a>
+        	       
+
+			<div>
+				<p>While working on my code, I came across the <code>container_of</code> macro, which I&rsquo;ve seen before but never really delved into. Its implementation was mostly as I expected, but some details caught my interest.</p>
+<pre tabindex="0"><code>#define offsetof(TYPE, MEMBER) ((size_t) &amp;((TYPE *)0)-&gt;MEMBER)
+/**
+ * container_of - cast a member of a structure out to the containing structure
+ * @ptr:    the pointer to the member.
+ * @type:   the type of the container struct this is embedded in.
+ * @member: the name of the member within the struct.
+ *
+ */
+#define container_of(ptr, type, member) ({          \
+	const typeof(((type *)0)-&gt;member)*__mptr = (ptr);    \
+		     (type *)((char *)__mptr - offsetof(type, member)); })
+</code></pre><p>For those who might be wondering why we don&rsquo;t use a simpler version like this:</p>
+<pre tabindex="0"><code>#define container_of(ptr, type, member) ({          \
+		     (type *)((char *)ptr - offsetof(type, member)); })
+</code></pre><p>This simpler version seems like it would do the job, so why add extra complexity? To answer this, let&rsquo;s look at another version of <code>container_of</code> from the Linux:</p>
+<pre tabindex="0"><code>#define container_of(ptr, type, member) ({				\
+	void *__mptr = (void *)(ptr);					\
+	static_assert(__same_type(*(ptr), ((type *)0)-&gt;member) ||	\
+		      __same_type(*(ptr), void),			\
+		      &#34;pointer type mismatch in container_of()&#34;);	\
+	((type *)(__mptr - offsetof(type, member))); })
+</code></pre><p>The Linux implementation includes type checking. This ensures at compile time that the <code>ptr</code> you pass is a pointer of type <code>member</code>. Here&rsquo;s an example to illustrate this:</p>
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+#include &lt;assert.h&gt;
+
+#define offsetof(TYPE, MEMBER) ((size_t) &amp;((TYPE *)0)-&gt;MEMBER)
+
+#define container_of(ptr, type, member) ({          \
+	const typeof(((type *)0)-&gt;member)*__mptr = (ptr);    \
+		     (type *)((char *)__mptr - offsetof(type, member)); })
+
+struct container {
+  int a;
+  long b;
+};
+
+int main() {
+  struct container cont;
+  int *wrong_ptr = (int *)&amp;(cont.b);
+
+  struct container *ptr = container_of(wrong_ptr, struct container, b);
+  assert(ptr == &amp;cont);
+
+  return 0;
+}
+</code></pre><p>Compiling this with GCC gives us the following warning:</p>
+<pre tabindex="0"><code>$ gcc test.c
+test.c:19:27: warning: incompatible pointer types initializing &#39;const typeof (((struct container *)0)-&gt;b) *&#39; (aka &#39;const long *&#39;) with an expression of type &#39;int *&#39; [-Wincompatible-pointer-types]
+  struct container *ptr = container_of(wrong_ptr, struct container, b);
+                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+test.c:7:36: note: expanded from macro &#39;container_of&#39;
+        const typeof(((type *)0)-&gt;member)*__mptr = (ptr);    \
+                                          ^        ~~~~~
+1 warning generated.
+</code></pre><p>This warning helps prevent potential errors, such as a user passing an incorrect <code>member</code>. However, you may notice that the <code>static_assert</code> version implementation allows the check to pass if the <code>*ptr</code> type is <code>void</code>, even if it doesn&rsquo;t match the <code>member</code> type. Why is this?</p>
+<p>According to ChatGPT, this design choice enhances generality and flexibility. Though I haven&rsquo;t encountered a situation requiring this feature, I won&rsquo;t delve deeper into it here.</p>
+
+			</div>
+		</article>
+	</main>
+<aside>
+	<div>
+		<div>
+			<h3>LATEST POSTS</h3>
+		</div>
+		<div>
+			<ul>
+				
+				<li><a href="/posts/2024-06-13-container_of/">`container_of` macro from the Linux</a></li>
+				
+			</ul>
+		</div>
+	</div>
+</aside>
+
+
+	
+
+</body>
+</html>
