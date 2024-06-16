@@ -9,6 +9,7 @@ categories:
 tags:
   - Linux
   - C
+  - Macro
 ---
 
 While working on my code, I came across the `container_of` macro, which I've seen before but never really delved into. Its implementation was mostly as I expected, but some details caught my interest.
