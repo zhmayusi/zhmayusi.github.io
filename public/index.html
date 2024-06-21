@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
-	<meta name="generator" content="Hugo 0.127.0">
+	<meta name="generator" content="Hugo 0.127.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,7 +16,7 @@
 <body>
 	<header>
 	==============<br>
-	== <a href="https://zhmayusi.github.io/">zhmayusi</a> ==<br>
+	== <a href="http://localhost:1313/">zhmayusi</a> ==<br>
 	==============
 	<div style="float: right;"></div><br>
 	<p>
@@ -40,18 +40,35 @@
 		
 		
 			<article>
-	<h1><a href="https://zhmayusi.github.io/posts/2024-06-13-container_of/">`container_of` macro from the Linux</a></h1>
+	<h1><a href="http://localhost:1313/posts/2024-06-19-ibv_get_device_list/">rdma-core | ibv_get_device_list</a></h1>
+	<b><time>19.06.2024 08:11</time></b>
+	
+	<a href="/tags/rdma">RDMA</a>
+	
+	<div>
+		Related resources The implementation of ibv_get_device_list is available in the rdma-core repository. You can find the specification in the man ibv_get_device_list manual or on RDMAmojo. API definition # define LATEST_SYMVER_FUNC(_public_sym, _uniq, _ver_str, _ret, ...) \ _MAKE_SYMVER_FUNC(_public_sym, _uniq, &#34;@&#34; _ver_str, _ret, __VA_ARGS__) LATEST_SYMVER_FUNC(ibv_get_device_list, 1_1, &#34;IBVERBS_1.1&#34;, struct ibv_device **, int *num) First, the implementation declares it is of version “IBVERBS_1.1”. The function accepts a pointer to an integer, num, as its only argument.
+		
+			<a href="http://localhost:1313/posts/2024-06-19-ibv_get_device_list/">Read more...</a>
+		
+	</div>
+</article>
+
+		
+			<article>
+	<h1><a href="http://localhost:1313/posts/2024-06-13-container_of/">`container_of` macro from the Linux</a></h1>
 	<b><time>13.06.2024 00:11</time></b>
 	
 	<a href="/tags/linux">Linux</a>
 	
 	<a href="/tags/c">C</a>
 	
+	<a href="/tags/macro">Macro</a>
+	
 	<div>
 		While working on my code, I came across the container_of macro, which I&rsquo;ve seen before but never really delved into. Its implementation was mostly as I expected, but some details caught my interest.
 #define offsetof(TYPE, MEMBER) ((size_t) &amp;((TYPE *)0)-&gt;MEMBER) /** * container_of - cast a member of a structure out to the containing structure * @ptr: the pointer to the member. * @type: the type of the container struct this is embedded in.
 		
-			<a href="https://zhmayusi.github.io/posts/2024-06-13-container_of/">Read more...</a>
+			<a href="http://localhost:1313/posts/2024-06-13-container_of/">Read more...</a>
 		
 	</div>
 </article>

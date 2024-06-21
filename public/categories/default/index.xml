@@ -2,17 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Default on zhmayusi</title>
-    <link>https://zhmayusi.github.io/categories/default/</link>
+    <link>http://localhost:1313/categories/default/</link>
     <description>Recent content in Default on zhmayusi</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 13 Jun 2024 00:11:11 +0800</lastBuildDate>
-    <atom:link href="https://zhmayusi.github.io/categories/default/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Jun 2024 08:11:52 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/default/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>rdma-core | ibv_get_device_list</title>
+      <link>http://localhost:1313/posts/2024-06-19-ibv_get_device_list/</link>
+      <pubDate>Wed, 19 Jun 2024 08:11:52 +0800</pubDate>
+      <guid>http://localhost:1313/posts/2024-06-19-ibv_get_device_list/</guid>
+      <description>Related resources The implementation of ibv_get_device_list is available in the rdma-core repository. You can find the specification in the man ibv_get_device_list manual or on RDMAmojo. API definition # define LATEST_SYMVER_FUNC(_public_sym, _uniq, _ver_str, _ret, ...) \ _MAKE_SYMVER_FUNC(_public_sym, _uniq, &amp;#34;@&amp;#34; _ver_str, _ret, __VA_ARGS__) LATEST_SYMVER_FUNC(ibv_get_device_list, 1_1, &amp;#34;IBVERBS_1.1&amp;#34;, struct ibv_device **, int *num) First, the implementation declares it is of version “IBVERBS_1.1”. The function accepts a pointer to an integer, num, as its only argument.</description>
+    </item>
     <item>
       <title>`container_of` macro from the Linux</title>
-      <link>https://zhmayusi.github.io/posts/2024-06-13-container_of/</link>
+      <link>http://localhost:1313/posts/2024-06-13-container_of/</link>
       <pubDate>Thu, 13 Jun 2024 00:11:11 +0800</pubDate>
-      <guid>https://zhmayusi.github.io/posts/2024-06-13-container_of/</guid>
+      <guid>http://localhost:1313/posts/2024-06-13-container_of/</guid>
       <description>While working on my code, I came across the container_of macro, which I&amp;rsquo;ve seen before but never really delved into. Its implementation was mostly as I expected, but some details caught my interest.&#xA;#define offsetof(TYPE, MEMBER) ((size_t) &amp;amp;((TYPE *)0)-&amp;gt;MEMBER) /** * container_of - cast a member of a structure out to the containing structure * @ptr: the pointer to the member. * @type: the type of the container struct this is embedded in.</description>
     </item>
   </channel>
